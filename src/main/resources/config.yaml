@@ -1,0 +1,26 @@
+default environment: int
+
+basic configuration:
+  browser name: CHROME
+  headless: false
+  implicit wait: 3
+  explicit wait: 30
+  faker language: pl-PL
+  browser option maximized: start-maximized
+  browser option remote allow: --remote-allow-origins=*
+
+environments:
+  - env name: test
+    web url: http://www.seleniumui.moderntester.pl/modal-dialog.php
+    userName: Tester
+    password: password123
+    mail: test@gmail.com
+    currency: USD
+
+  - env name: int
+    web url: http://146.59.32.4/
+    user social title: MR
+    user first name: Słoń
+    user last name: Trąbalski
+    user email: strabalski@test.pl
+    user password: 12345678
