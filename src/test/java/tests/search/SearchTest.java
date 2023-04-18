@@ -3,7 +3,7 @@ package tests.search;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pages.menu.DropdownOptionPage;
+import pages.main.DropdownOptionPage;
 import tests.BaseTest;
 import utils.CustomAssertion;
 
@@ -23,9 +23,10 @@ public class SearchTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"HUMMINGBIRD"})
     public void searchDropdownOptionsContainsTypedValue(String textToSearch) {
-        List<DropdownOptionPage> dropdownOptions = at.menuStep
-                .enterSearchText(textToSearch)
-                .getDropdownOptions();
+        List<DropdownOptionPage> dropdownOptions =
+                at.menuStep
+                        .enterSearchText(textToSearch)
+                        .getDropdownOptions();
 
         CustomAssertion.assertThatAllListElements(dropdownOptions, e -> e.containsText(textToSearch));
     }

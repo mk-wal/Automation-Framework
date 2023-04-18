@@ -1,4 +1,4 @@
-package pages.menu;
+package pages.main;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

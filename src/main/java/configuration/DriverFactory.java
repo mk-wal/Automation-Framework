@@ -1,6 +1,7 @@
 package configuration;
 
 import configuration.models.Browser;
+import helpers.WaitHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +13,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,9 @@ public class DriverFactory {
     private WebDriver driver;
     private Browser browser;
     private final String BROWSER_PROPERTY_KEY = "browser name";
-    private final String IMPLICIT_WAIT_VALUE_KEY = "implicit wait";
 
     private final String URL_KEY = "web url";
+
     public DriverFactory() {
         EnvironmentProperty.getInstance();
     }
@@ -37,13 +37,14 @@ public class DriverFactory {
             case CHROME -> setChrome();
             case FIREFOX -> setFirefox();
             case EDGE -> setEdge();
+            case IE -> setIE();
             default -> {
                 InternetExplorerOptions optionsDefault = new InternetExplorerOptions();
                 WebDriverManager.iedriver().setup();
                 driver = new InternetExplorerDriver(optionsDefault);
             }
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(System.getProperty(IMPLICIT_WAIT_VALUE_KEY))));
+        WaitHelper.turnOnImplicitWait(driver);
         driver.get(System.getProperty(URL_KEY));
         return driver;
     }
@@ -69,11 +70,17 @@ public class DriverFactory {
         driver = new EdgeDriver(options);
     }
 
-    private List<String> getBrowserOptionsArguments(){
+    private void setIE() {
+        WebDriverManager.iedriver().setup();
+        driver = new InternetExplorerDriver();
+        driver.manage().window().maximize();
+    }
+
+    private List<String> getBrowserOptionsArguments() {
         Map<String, String> properties = EnvironmentProperty.getInstance().getProperties();
         List<String> browserOptionsKeys = properties.keySet().stream().filter(key -> key.startsWith("browser option")).toList();
         List<String> arguments = new ArrayList<>();
-        for(String browserOptionKey : browserOptionsKeys) {
+        for (String browserOptionKey : browserOptionsKeys) {
             arguments.add(properties.get(browserOptionKey));
         }
         return arguments;

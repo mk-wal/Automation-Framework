@@ -2,19 +2,17 @@ package tests;
 
 import configuration.DriverFactory;
 import configuration.EnvironmentProperty;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import steps.BaseStep;
 
 @Slf4j
 public class BaseTest {
     protected WebDriver driver;
 
-    protected Pages at;
+    protected Steps at;
 
     @BeforeAll
     static void setup() {
@@ -24,7 +22,7 @@ public class BaseTest {
     @BeforeEach
     void setupDriver() {
         driver = new DriverFactory().getDriver();
-        at = new Pages(driver);
+        at = new Steps(driver);
         log.debug("Driver initialized.");
     }
 
@@ -32,11 +30,6 @@ public class BaseTest {
     void teardown() {
         driver.quit();
         log.debug("Driver closed.");
-    }
-
-    @SneakyThrows
-    public <T extends BaseStep> T with(Class<T> page) {
-        return page.getDeclaredConstructor(WebDriver.class).newInstance(driver);
     }
 
 }

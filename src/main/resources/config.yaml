@@ -1,4 +1,4 @@
-default environment: int
+default environment: test
 
 basic configuration:
   browser name: CHROME
@@ -11,16 +11,18 @@ basic configuration:
 
 environments:
   - env name: test
-    web url: http://www.seleniumui.moderntester.pl/modal-dialog.php
-    userName: Tester
-    password: password123
-    mail: test@gmail.com
-    currency: USD
-
-  - env name: int
-    web url: http://146.59.32.4/
+    web url: http://146.59.32.4/index.php
+    cart url part: ?controller=cart&action=show
     user social title: MR
     user first name: Słoń
     user last name: Trąbalski
     user email: strabalski@test.pl
     user password: 12345678
+    home address: Sheraton Ave
+    home city: Austin
+    home zipcode: 73301
+    home state: Texas
+    invoice address: Courthouse Square
+    invoice city: Oxford
+    invoice zipcode: 38655
+    invoice state: Mississippi

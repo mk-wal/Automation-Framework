@@ -22,7 +22,11 @@ public class ProductPage extends BasePage {
         return title.getText();
     }
 
-//    public BigDecimal getPrice() {
-//        return 0.0;
-//    }
+    public void click() {
+        title.click();
+    }
+
+    public BigDecimal getPrice() {
+        return parsePriceToBigDecimal(price.getText());
+    }
 }

@@ -8,7 +8,7 @@ pipeline
     stages {
        stage('Build') {
          steps {
-            echo '>>>Conecting to git repo - MAT >>>>>>>>>>>>>>>'
+            echo '>>>Connecting to git repo - MAT >>>>>>>>>>>>>>>'
             //  git 'https://github.com/walacm-sii/Selenium_8.1'
              git branch: "main", url: 'https://github.com/walacm-sii/Selenium_8.1'
              bat 'mvn clean compile'

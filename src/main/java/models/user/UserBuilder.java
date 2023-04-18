@@ -6,7 +6,7 @@ public class UserBuilder {
     private String lastName;
     private String email;
     private String password;
-    private String birthdate; // optional
+    private String birthdate;
 
     public UserBuilder() {
     }
@@ -36,14 +36,17 @@ public class UserBuilder {
         this.lastName = lastName;
         return this;
     }
+
     public UserBuilder email(String email) {
         this.email = email;
         return this;
     }
+
     public UserBuilder password(String password) {
         this.password = password;
         return this;
     }
+
     public UserBuilder birthdate(String birthdate) {
         this.birthdate = birthdate;
         return this;

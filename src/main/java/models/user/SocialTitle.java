@@ -2,9 +2,9 @@ package models.user;
 
 public enum SocialTitle {
     MR("1"),
-    MRS( "2");
+    MRS("2");
 
-    private String value;
+    private final String value;
 
     SocialTitle(String value) {
         this.value = value;

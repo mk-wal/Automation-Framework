@@ -1,11 +1,8 @@
-package models;
+package models.user;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import models.user.SocialTitle;
-import models.user.User;
-import models.user.UserBuilder;
 
 import java.util.Locale;
 import java.util.Random;
@@ -16,6 +13,7 @@ public class UserFactory {
 
     private static FakeValuesService fakeValuesService;
     private static Faker faker;
+
     public static User getAlreadyRegisteredUser() {
         return new UserBuilder()
                 .socialTitle(SocialTitle.valueOf(System.getProperty("user social title")))

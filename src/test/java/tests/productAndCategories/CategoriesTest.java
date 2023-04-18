@@ -1,9 +1,8 @@
 package tests.productAndCategories;
 
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import pages.menu.MenuPage;
+import pages.main.components.Category;
+import pages.main.components.Subcategory;
 import tests.BaseTest;
 
 import java.util.List;
@@ -12,18 +11,29 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CategoriesTest extends BaseTest {
 
-//    @Test
-    public void test() {
-        List<WebElement> categories = at.menuStep.getCategories();
-        for(WebElement category : categories) {
+    @Test
+    public void categoryShouldLoadCorrect() {
+        List<Category> categories = at.menuStep.getCategories();
+        for (Category category : categories) {
+            category.select();
+            String categoryName = category.getName();
+            assertThat(at.categoryDetailsStep.getCategoryMainName()).isEqualTo(categoryName);
+            assertThat(at.filterStep.isFilterVisible()).isTrue();
+            assertThat(at.categoryDetailsStep.getTotalProductsCounterNumber())
+                    .isEqualTo(at.productGridStep.getProductsTitles().size());
+        }
+    }
 
-
-            String categoryName = category.getText();
-            category.click();
-            System.out.println(categoryName);
-
-            String title = at.categoryViewStep.getCategoryTitle();
-            assertThat(title).isEqualTo(categoryName);
+    @Test
+    public void subcategoryShouldLoadCorrect() {
+        List<Subcategory> subcategories = at.menuStep.getSubcategories();
+        for (Subcategory subcategory : subcategories) {
+            subcategory.select();
+            String categoryName = subcategory.getName();
+            assertThat(at.categoryDetailsStep.getCategoryMainName()).isEqualTo(categoryName);
+            assertThat(at.filterStep.isFilterVisible()).isTrue();
+            assertThat(at.categoryDetailsStep.getTotalProductsCounterNumber())
+                    .isEqualTo(at.productGridStep.getProductsTitles().size());
         }
     }
 }
