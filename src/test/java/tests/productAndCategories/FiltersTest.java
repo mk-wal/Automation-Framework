@@ -20,7 +20,7 @@ public class FiltersTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("testDataProvider")
-    public void filter(String category, int lowerFilterRange, int upperFilterRange) {
+    public void productsAreFilteredByPrice(String category, int lowerFilterRange, int upperFilterRange) {
         at.menuStep.selectCategory(category);
         int quantity = at.categoryDetailsStep.getTotalProductsCounterNumber();
 
