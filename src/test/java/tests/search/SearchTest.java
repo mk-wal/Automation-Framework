@@ -1,13 +1,14 @@
 package tests.search;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import pages.main.DropdownOptionPage;
 import tests.BaseTest;
-import utils.CustomAssertion;
 
 import java.util.List;
+
 
 public class SearchTest extends BaseTest {
 
@@ -17,7 +18,7 @@ public class SearchTest extends BaseTest {
         at.menuStep.searchForText(randomTitle);
         List<String> productTitlesAfterSearch = at.productGridStep.getProductsTitles();
 
-        CustomAssertion.assertThatAllListElements(productTitlesAfterSearch, e -> e.contains(randomTitle));
+        Assertions.assertThat(productTitlesAfterSearch).allMatch(e -> e.contains(randomTitle));
     }
 
     @ParameterizedTest
@@ -28,6 +29,6 @@ public class SearchTest extends BaseTest {
                         .enterSearchText(textToSearch)
                         .getDropdownOptions();
 
-        CustomAssertion.assertThatAllListElements(dropdownOptions, e -> e.containsText(textToSearch));
+        Assertions.assertThat(dropdownOptions).allMatch(e -> e.containsText(textToSearch));
     }
 }

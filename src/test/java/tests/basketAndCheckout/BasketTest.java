@@ -50,22 +50,22 @@ public class BasketTest extends BaseTest {
         }
         driver.get(UrlProvider.getCartUrl());
 
-        assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
-        assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
+        softly.assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
+        softly.assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
                 .isEqualTo(at.shoppingCartStep.getCartTotalPrice());
 
         at.shoppingCartStep.getProducts().get(0).clickDeleteIcon();
 
-        assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
-        assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
+        softly.assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
+        softly.assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
                 .isEqualTo(at.shoppingCartStep.getCartTotalPrice());
 
         at.shoppingCartStep.getProducts().get(0).clickDeleteIcon();
 
-        assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
-        assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
+        softly.assertThat(at.shoppingCartStep.getSumOfProductsPrices()).isEqualTo(at.shoppingCartStep.getAllProductsTotalPrice());
+        softly.assertThat(at.shoppingCartStep.getAllProductsTotalPrice().add(at.shoppingCartStep.getShippingPrice()))
                 .isEqualTo(at.shoppingCartStep.getCartTotalPrice());
-        assertThat(at.shoppingCartStep.isNoItemsMessageVisible()).isTrue();
+        softly.assertThat(at.shoppingCartStep.isNoItemsMessageVisible()).isTrue();
     }
 
 }

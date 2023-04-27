@@ -29,9 +29,9 @@ public class ProductTest extends BaseTest {
                 .addToCart();
         ProductLine popupLine = at.productPopupStep.getProductLine();
 
-        assertThat(popupLine).usingRecursiveComparison().isEqualTo(productLine);
-        assertThat(at.productPopupStep.getProductCount()).isEqualTo(quantity);
-        assertThat(at.productPopupStep.getProductSubtotal()).isEqualTo(popupLine.getTotalValueOfLine());
+        softly.assertThat(popupLine).usingRecursiveComparison().isEqualTo(productLine);
+        softly.assertThat(at.productPopupStep.getProductCount()).isEqualTo(quantity);
+        softly.assertThat(at.productPopupStep.getProductSubtotal()).isEqualTo(popupLine.getTotalValueOfLine());
 
         at.productPopupStep.clickContinueShopping();
         assertThat(at.menuStep.getProductsInCartCounter()).isEqualTo(quantity);

@@ -46,11 +46,8 @@ public class ShoppingCartStep extends BaseStep {
     }
 
     public BigDecimal getSumOfProductsPrices() {
-        BigDecimal total = new BigDecimal("0.00");
-        for (BigDecimal price : shoppingCartPage.getListOfItemsPrices()) {
-            total = total.add(price);
-        }
-        return total;
+        return shoppingCartPage.getListOfItemsPrices().stream()
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public List<CartProductPage> getProducts() {

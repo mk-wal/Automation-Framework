@@ -14,8 +14,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class CheckoutTest extends BaseTest {
 
     private static Stream<Arguments> testDataProvider() {
@@ -53,10 +51,10 @@ public class CheckoutTest extends BaseTest {
                 .openOrderHistory()
                 .openOrderDetails(orderReferenceNumber);
 
-        assertThat(at.orderDetailsStep.getStatus()).isEqualTo(Status.AWAITING.getValue());
-        assertThat(at.orderDetailsStep.getOrderDate()).isEqualTo(LocalDate.now());
-        assertThat(at.orderDetailsStep.getTotalPrice()).isEqualTo(totalPrice);
-        assertThat(invoiceAddress.ifStringContainsAllFields(at.orderDetailsStep.getInvoiceAddressDetails())).isTrue();
-        assertThat(deliveryAddress.ifStringContainsAllFields(at.orderDetailsStep.getDeliveryAddressDetails())).isTrue();
+        softly.assertThat(at.orderDetailsStep.getStatus()).isEqualTo(Status.AWAITING.getValue());
+        softly.assertThat(at.orderDetailsStep.getOrderDate()).isEqualTo(LocalDate.now());
+        softly.assertThat(at.orderDetailsStep.getTotalPrice()).isEqualTo(totalPrice);
+        softly.assertThat(invoiceAddress.ifStringContainsAllFields(at.orderDetailsStep.getInvoiceAddressDetails())).isTrue();
+        softly.assertThat(deliveryAddress.ifStringContainsAllFields(at.orderDetailsStep.getDeliveryAddressDetails())).isTrue();
     }
 }

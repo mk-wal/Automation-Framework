@@ -1,10 +1,10 @@
 package tests.productAndCategories;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import tests.BaseTest;
-import utils.CustomAssertion;
 
 import java.util.stream.Stream;
 
@@ -26,8 +26,8 @@ public class FiltersTest extends BaseTest {
 
         at.filterStep.changeFilterRange(lowerFilterRange, upperFilterRange);
 
-        CustomAssertion.assertThatAllListElements(at.productGridStep.getProducts(),
-                e -> e.getPrice().intValue() >= lowerFilterRange && e.getPrice().intValue() <= upperFilterRange);
+        Assertions.assertThat(at.productGridStep.getProducts()).allMatch(e -> e.getPrice().intValue() >= lowerFilterRange
+                && e.getPrice().intValue() <= upperFilterRange);
 
         at.filterStep.clearFilters();
         assertThat(at.productGridStep.getProducts().size()).isEqualTo(quantity);

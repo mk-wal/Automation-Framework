@@ -15,9 +15,10 @@ public class Cart {
     public void addProductLineToCart(ProductLine productLine) {
         if (products.stream().anyMatch(pl -> pl.getProduct().equals(productLine.getProduct()))) {
             products.get(getIndexOfProduct(productLine)).increaseQuantity(productLine.getQuantity());
-        } else {
-            products.add(productLine);
+            return;
         }
+        products.add(productLine);
+
     }
 
     public void addProductLineToCart(String name, BigDecimal price, int quantity) {
